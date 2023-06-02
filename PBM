@@ -1,0 +1,1263 @@
+# create your final project here
+
+# PLAN: This is just to use throughout the game. I do have
+# an ultimate plan which is to somehow use only last
+# name as well.
+"""
+user_name = input("What is the first and last name of your character?:").title()
+"""
+
+# PLAN: The idea for the user's age is to divide the game
+# based on, well, your age. If <18, make it kid friendly.
+# If =>18, make it for adults (minus the swearing).
+
+# I abandoned that plan ^^^
+
+"""
+while True:
+  user_age = input("What is your age?")
+  if user_age.isnumeric():
+    break
+  else:
+    print("\nSomething went wrong, please type your age using numbers (1, 2, 3, ect)")
+"""
+
+# PLAN: I'm going to create a card to show to the user, and 
+# let them confirm if this is the case.
+"""
+print(" ")
+print("CHARACTER --")
+print("NAME: " + user_name)
+print("AGE: " + user_age)
+print(" ")
+print("Is this you character?")
+while True:
+  character_confirmation = input("YES or NO:").upper()
+  if character_confirmation == "YES":
+    print("Nice to meet you " + user_name + "!")
+    break
+  elif character_confirmation == "NO":
+    print("Oh ok, please remake your character then.")
+    user_name = input("What is the first and last name of your character?:").title()
+    while True:
+      user_age = input("What is your age?")
+      if user_age.isnumeric():
+        break
+      else:
+        print("\nSomething went wrong, please type your age using numbers (1, 2, 3, ect)")
+    print(" ")
+    print("CHARACTER --")
+    print("NAME: " + user_name)
+    print("AGE: " + user_age)
+    print(" ")
+    print("Is this you character?")
+  else:
+    print("Something went wrong with your response, please try again!")
+"""
+
+# My friend Thomas Kivlehen gave me feedback, and he gave 
+# the idea to turn (some of) the code into a function.
+
+def name_and_age():
+ 
+ """
+ Summary - The idea of this code is to allow the user to create a "profile", 
+ which is really just a way to get their names and age. I had age because I was 
+ originally going to make an age gate, but decided against it. Might change that in
+ the future?
+ 
+ Args - N/A
+ 
+ Returns - N/A
+ """ 
+ 
+ while True:
+    while True:
+      user_name_first = input("What is your first name?:").title()
+      if user_name_first.isalpha() is True:
+        break
+      else:
+        print("\nSomething went wrong, please use letters only!\n")
+    while True:
+      user_name_last = input("What is your last name?:").title()
+      if user_name_last.isalpha() is True:
+        break
+      else:
+        print("\nSomething went wrong, please use letters only!\n")
+    while True:
+      user_age = input("What is your age?:")
+      if user_age.isnumeric():
+         break
+      else:
+         print("\nSomething went wrong, please type your age using numbers!\n")
+    print("\nEXAMPLE:")
+    print("------------------------------------")
+    print("\tPROFILE:")
+    print("\tNAME: " + user_name_first, user_name_last)
+    print("\tAGE: " + user_age)
+    print("------------------------------------")
+    print("Do you like your profile?")
+    character_confirmation = input("Type YES or NO:").upper()
+    if character_confirmation == "YES":
+       print("\nNice to meet you " + user_name_first + " " + user_name_last + "!")
+       return(user_age + " " + user_name_first + " " + user_name_last)
+       break
+    elif character_confirmation == "NO":
+       print("\nNo worries! Please go back to remake your profile!\n")
+    else:
+       print("\nThere seems to be a miskake, please try again.\n")
+
+#    While my friend was testing my code (Thomas Kivlehen),
+# I made the realization that I could not use the name +
+# the age outside the function. He then made the idea to
+# use the return, add it to another variable, and use that
+# variable for my name and age. He also explained how it worked.
+#    I also made a few adjustments of my own to either 
+# simplify or reduce the code.
+
+"""
+#     will use later:
+user_name_age = (name_and_age())
+"""
+# --------------------------------------
+# user_name_age.split()[0] = age
+# user_name_age.split()[1] = first name
+# user_name_age.split()[2] = last name
+# --------------------------------------
+
+# [ ] Make a start screen for the user.
+
+def start_screen():
+ 
+ """
+ Summary - This was made just to make the start screen, however looking back onto it,
+ it was not needed to be turned into a function.
+ 
+ Args - N/A
+ 
+ Returns - N/A
+ """
+ 
+ print("\tWELCOME TO \\CHOICES/\n")
+ print("A game to test your decision making!")
+ print("------------------------------------")
+ print("*TIP: An input is anything entered*")
+ ask_for_start = input("MAKE AN INPUT TO BEGIN:")
+ return "------------------------------------\n" 
+
+print(start_screen())
+
+# [ ] What I am about to make is a stopwatch-like 
+# function/variable so when your game is over, it
+# shows your time.
+
+from datetime import datetime
+
+start_time = datetime.today()
+
+def stopwatch(end_time):
+  
+  """
+  Summary - This is made to easily return the time it took for he user to play the game.
+  If I didn't make this function, I would have to manually put this code into every 
+  instance it would come up.
+  
+  Args - end_time: This variable allows me call the function without having to make it global.
+  
+  Returns - end_time: When replacing the variable (in the arg of function) with datetime.today(),
+  it allows the variable to automatically have the current time.
+  """
+  
+  from datetime import datetime
+  global start_time
+  
+  # Replace end_time with datetime.today() when calling the function.
+  total_time = end_time - start_time
+  print("You spent", total_time, "playing this game.")
+  return ""
+  
+# The code below me was the original code I made for 
+# and assignment, however I ended up making a better one.
+
+"""
+def password():
+  characters = input("Create a password by entering how mny characters will be in it. (1-10):")
+  while True:
+    if characters.isnumeric() is False:
+      characters = input("Remember, only use numbers!:\n")
+    elif (int(characters) < 1) or (int(characters) > 10):
+      characters = input("That is not in our bounds, please keep it between 1-10!:\n")
+    else: 
+      print("You selected your password to have", characters, "characters.\n")
+      break
+  
+  from random import shuffle, randint
+  
+  all_characters = ['a','b','c','d','e','f','g','h','i','j',
+                    'k','l','m','n','o','p','q','r','s','t',
+                    'u','v','w','x','y','z',
+                    'A','B','C','D','E','F','G','H','I','J',
+                    'K','L','M','N','O','P','Q','R','S','T',
+                    'U','V','W','X','Y','Z',
+                    '0','1','2','3','4','5','6','7','8','9',
+                    '!','@','#','$','%','*','?']
+
+  shuffle(all_characters)
+  password = "".join(all_characters[0:int(characters)])
+  
+  print("Your password is:")
+  return password
+
+password = password()
+print(password)
+print("")
+
+# Context: I made this password in a different assignment,
+# but I intended it to be apart of this project.
+
+def confirm_password():
+  attempts = 0
+  while True:
+    answer = input("What is your password?:")
+    if answer == password:
+      print("Correct! Enjoy the rest of the game!")
+      return 0
+      break
+    elif answer != password:
+      print("That was incorrect, try again.")
+      attempts += 1
+      if attempts == 3:
+        print("You guessed too many wrong.")
+        return 1  
+        break
+
+check = confirm_password()
+
+while True:
+  if check == 0:
+    print("Remember that password, it might become useful down the road.")
+    break
+  elif check == 1:
+    print("\nSorry, but you cannot progress the game because you did not know your password. Good bye!\n")
+    quit()
+"""
+
+def password():
+ 
+ """
+ Summary - Makes the user create a password that has 5 to 10 characters in it.
+ 
+ Args - N/A
+ 
+ Returns - N/A
+ """
+ 
+ while True:
+    characters = input("How many characters do you want in your password? (5-10):")
+    while True:
+      if characters.isnumeric() is False:
+         characters = input("Remember, only use numbers!:")
+      elif (int(characters) < 5) or (int(characters) > 10):
+         characters = input("That is not in our bounds, please keep it between 5 to 10!:")
+      else: 
+         print("You selected your password to have", characters, "characters.\n")
+         break
+  
+    from random import shuffle
+  
+    all_characters = ['a','b','c','d','e','f','g','h','i','j',
+                      'k','l','m','n','o','p','q','r','s','t',
+                      'u','v','w','x','y','z',
+                      'A','B','C','D','E','F','G','H','I','J',
+                      'K','L','M','N','O','P','Q','R','S','T',
+                      'U','V','W','X','Y','Z',
+                      '0','1','2','3','4','5','6','7','8','9',
+                      '!','@','#','$','%','*','?']
+
+    shuffle(all_characters)
+    password = "".join(all_characters[0:int(characters)])
+  
+    print("Your password is:", password)
+    print("")
+     
+    confirmation = input("What is your password?:")
+    
+    attempts = 3
+    
+    while True:
+      if confirmation == password:
+        print("\nGreat!\n*TIP: Remember that down the road, it might be useful*\nNow continue creating your profile.")
+        return password
+      elif confirmation != password:
+        print("You have", attempts, "left.")
+        confirmation = input("Please try again:")
+        attempts = attempts - 1
+        if attempts == 0:
+          print("You have made too many attempts, please remake your password.\n")
+          break
+
+# Important to note: I enjoyed coding a lot, to the point where I downloaded a software called
+# Visual Studio. If you see any "# type: ignore", there was seemingly error in the code, but
+# wasn't affecting my results. Appearently you need to make password() a str, but I disagree.
+# Plus, if I have to, I could just cast str() to password to make the code work.
+
+password = password() # type: ignore
+print("")
+
+"""
+This one was bad in terms of use and enjoyment.
+
+import time
+time.sleep(2)
+"""
+
+# Time to print the story.
+
+user_name_age = (name_and_age())
+
+print("Enjoy the game wonderful adventurer!")
+"""
+story_input = input("\nMAKE AN INPUT:")
+"""
+import time
+time.sleep(1)
+# I am going to make a function that will automatically
+# allow me to add things to the user's inventory with stats.
+# I also have to make the user's health and damage.
+
+user_hp = 200
+user_atk = 35
+
+def user_inv(inventory):
+  
+  """
+  Summary - Allows the user to use their inventory and take and use an item from their inventory.
+  
+  Args - inventory: Holds all items for the user. Allows the function to access their inventory.
+  
+  Returns - inventory: Changes in inventory (if user used any items) will be taken out and be used.
+  """
+  
+  print("\nThis is what you have in your inventory:\n")
+  for i in inventory:
+    print("--", i)
+  print("\nIf you want to close your inventory, type \"close\".")
+  ask_inv = input("What do you want to use from your inventory?:").lower()
+  
+  # I couldn't put them into the () of the function, so I looked up
+  # another way changing a global variable inside a function. This worked.
+  global user_hp
+  global enemy_hp
+  
+  while True:
+    
+    # the function will check every possible item and 
+    # option.
+    
+    if ask_inv == "close":
+      print("\nClosing inventory...")
+      return ""
+    
+    elif ask_inv == "reminisce":
+      if "reminisce" in inventory:
+        user_hp += 50
+        print("\nYou remember what you said in the beginning of your journey. You said \n\"" + str(remember_thought_words) + "\"\nYou gain the confidence to fight for longer.")
+        print("Your health is now:")
+        inventory.remove("reminisce")
+        return user_hp
+      else:
+        print("Sorry, you do not have this item.")
+        break
+        
+    elif ask_inv == "healing potion":
+      if "healing potion" in inventory:
+        user_hp += 100
+        print("\n100 hp restored, this is your health:")
+        inventory.remove("healing potion")
+        return user_hp
+      else:
+        print("Sorry, you do not have this item.")
+        break
+        
+    elif ask_inv == "slingshot":
+      if "slingshot" in inventory:
+        enemy_hp -= 150
+        print("\nYou did 150 dmg to your enemy!")
+        inventory.remove("slingshot")
+        return enemy_hp
+      else:
+        print("Sorry, you do not have this item.")
+        break
+    
+    # I added this part later after making the treasure chest function.
+    elif ask_inv == "special item":
+      if "special item" in inventory:
+        user_hp += 50
+        enemy_hp -= 150
+        print("You used your special item!")
+        inventory.remove("special item")
+        return ""
+      else:
+        print("Sorry, you do not have this item.")
+        break
+    
+    elif ask_inv == "legendary item":
+      if "legendary item" in inventory:
+        enemy_hp -= 500
+        print("\nWow! You used a legendary item! That deals 500 damage!")
+        inventory.remove("legendary item")
+        return ""
+      else:
+        print("Sorry, you do not have this item.")
+        break
+    
+    else:
+      ask_inv = input("\nSomething went wrong, please retype your input:")
+
+# [ ] Story time
+
+print("\nYou just turned", user_name_age.split()[0], "and you decided it is time to start your great adventure!"
+      " An adventure that no one else has ever completed! It will be hard and long, but you believe you can do it.")
+
+import time
+time.sleep(1)
+"""
+Now that I have time.sleep(), I don't need these inputs.
+
+story_input = input("\nMAKE AN INPUT:")
+"""
+
+print("\nYou think \"Wow", user_name_age.split()[1] + ", this is it! My time to shine!\"")
+print("")
+
+remember_thought_words = input("What do you say that will boost your confidence?: ")
+inventory = []
+remember_thought = "reminisce" # heals 100 hp
+inventory.append(remember_thought)
+
+print("As you think of nice thoughts that will boost yourself on this long adventure, you meet a trader.")
+
+print("\nNEW ITEM: reminisce - heals 100 hp")
+
+import time
+time.sleep(4)
+"""
+story_input = input("\nMAKE AN INPUT:")
+"""
+
+print("\n\"Hello there Captain " + user_name_age.split()[2] + ", I got some goodies for you. Take one for free!\"")
+
+def user_stats(user_atk, user_hp):
+  
+  """
+  Summary - Showcases the user's inventory and stats (their health and damage).
+  
+  Args - user_atk: Allows the function to showcase the user's attack damage.
+         user_hp: Allows the function to showcase the user's health pool.
+  
+  Returns - user_atk: Returns the user's atk as the same thing printed.
+            user_hp: Returns the user's hp as the same thing printed.
+  """
+  
+  # previously this was all regular lines of code, but 
+  # I put it into a function to use later.
+  
+  print("")
+  print("---------------------------")
+  print("\tCurrent stats - ")
+  
+  # This is all the new code (the time stuff) which I wanted
+  # to include for the fun of it.
+  from datetime import datetime
+  stat_time = datetime.today()
+  current_time = stat_time - start_time
+  print("Time:", current_time)
+  
+  print("Health:", user_hp)
+  print("Damage:", user_atk)
+  print("Inventory:")
+  for i in inventory:
+    print ("-", i)
+  print("---------------------------")
+  return ""
+
+print(user_stats(user_atk, user_hp))
+
+import time
+time.sleep(2)
+
+new_item = input("These are your options:\nA) A better sword\nB) Better armor\nC) A healing potion\nD) A slingshot\nWhat will you choose? (A/B/C/D):").upper()
+while True:
+  if new_item == "A":
+    user_atk = 55 # makes user's attack now 55 dmg
+    print("\n\"The trusty sword, great choice! Enjoy the rest of your journey adventurer!\"")
+    print("\nNEW ITEM: better sword (auto-equipped) - you now have 55 atk strength (was 35)")
+    break
+  elif new_item == "B":
+    user_hp = 300 # makes user's health now 300 hp
+    print("\n\"Ah, the ol safety option, an amazing choice! Enjoy the rest of your journey adventurer!\"")
+    print("\nNEW ITEM: better armor (auto-equipped) - you now have 300 hp (was 200)")
+    break
+  elif new_item == "C":
+    healing_potion = "healing potion" # heals 100 hp
+    inventory.append(healing_potion)
+    print("\n\"Ooh, the savior of lives, a devine choice! Enjoy the rest of your journey adventurer!\"")
+    print("\nNEW ITEM: healing potion - heals 100 hp")
+    break
+  elif new_item == "D":
+    slingshot = "slingshot" # deals 150 dmg
+    inventory.append(slingshot)
+    print("\n\"The last resort, good for bad situations, a powerful choice! Enjoy the rest of your journey adventurer!\"")
+    print("\nNEW ITEM: slingshot - does 150 atk for 1 turn")
+    break
+  else:
+    new_item = input("\"Something went wrong adventurer, and I want you to leave with something!\"\nWhat will you choose?:").upper()
+
+# Now I can use this print statement, along with 
+# adjusting the function (user_inventory()) with any
+# new item. This will save me a lot of time.
+"""
+print(user_inv(inventory))
+"""
+
+print(user_stats(user_atk, user_hp))
+
+# Now I am going to showcase all my current functions.
+# -----------------------------------------------------
+# def name_and_age()
+# def start_screen()
+# def password()
+# user_inv(inventory)
+# user_stats(user_atk, user_hp)
+# -----------------------------------------------------
+# The last 2 are the most useful right now, while the
+# password() will be used later for a cool chance for 
+# gaining a new item.
+
+# [ ] Story time to transition to the user's first battle.
+
+print("As you make you choice, an enemy approaches you.")
+print("You think about running, but decided this was your first"
+      " chance to show how strong you are.\n")
+
+# [ ] Time to code the battle, I plan on the function being
+# reuseable for later battles.
+
+enemy_hp = 200
+enemy_atk = 20
+enemy_inv = ["slingshot", "healing potion", "nothing", "nothing"]
+
+def enemy_stats(enemy_atk, enemy_hp):
+  
+  """
+  Summary - Showcases the enemy's inventory and stats (atk and hp).
+  
+  Args - enemy_atk: Allows the function to show the current atk.
+         enemy_hp: Allows the function to show the current hp.
+  
+  Returns - enemy_atk: Nothing changes.
+            enemy_hp: Nothing changes.
+  """
+  
+  # This allows the user to see the enemy's stats.
+  
+  print("")
+  print("---------------------------")
+  print("Current enemy stats - ")
+  print("Health:", enemy_hp)
+  print("Damage:", enemy_atk)
+  print("Inventory:")
+  for i in enemy_inv:
+    if i != "nothing":
+      print("-", i)
+    else:
+      pass
+  print("---------------------------")
+  return ""
+
+def enemy_actions():
+  
+  """
+  Summary - Allows the enemy to make decisions based on chance. The choices are either
+  using an item from the inventory or nothing, which just attacks the user.
+  
+  Args - N/A
+  
+  Returns - N/A
+  """
+  
+  # This is where all of the enemy's decision making happens.
+  
+  global enemy_hp
+  global enemy_atk
+  global enemy_inv
+  global user_hp
+  
+  # This is so the randint works and has an appropriate range.
+  """
+  # This was used to sort out the item issues, but
+  # I ended up just keeping "nothing" in the enemy_inv so
+  # that a filter wasn't needed.
+  if enemy_inv == []:
+    ran_enemy_item = "nothing"
+    enemy_inv.append("nothing")
+  else:
+  """
+  """
+  This part is useless because I took out the randint function.
+  inv_range = 0
+  for i in enemy_inv:
+    inv_range += 1
+  """
+  from random import shuffle
+  shuffle(enemy_inv)
+  ran_enemy_item = enemy_inv[0]
+  
+  if enemy_hp <= 300:
+    if "super healing potion" in enemy_inv: 
+      enemy_inv.remove("super healing potion")
+      print("\nThe enemy nearly died, but had a trick up his sleeve! He gains back a lot of health, but his attack is reduced. Now is your chance!")
+      enemy_hp += 600
+      enemy_atk -= 35
+      return ""
+    else:
+      """
+      This code wasn't working (in terms of how it was supposed to work) because any enemy under 300
+      hp would instantly go into this and never use items in their inventory. I have to replace this with a pass and add an else statement.
+      
+      print("\nThe enemy attacked you!")
+      user_hp -= enemy_atk
+      print("The enemy hit you for", enemy_atk, "hp.")
+      return ""
+      """
+      pass
+  
+  """
+  I just need a to point out an issue I had with this code. When testing my game on Visual Studio,
+  I found that the enemy wasn't attacking. So, torrmorrow in class (which is today for me) I used a 
+  blank trinket to figure out what was going on (I only had access to trinket). By only using the needed
+  functions that battle() used, I figured out that the first if statement of enemy_actions() was the issue.
+  So after some trial and error, I figured out that the issue is that my next comparison, the 
+  elif ran_enemy_item == "nothing" needed to be an IF STATEMENT. I don't know exactly why this is the case.
+  But if I had to try and explain why that happened, my guess is that the if/elif/else only works when comparing
+  the same certain thing or has the same thing being compared. Since the two different comparisons (the one above
+  and below this message) are comparing two different things, the enemy's health and their item, the code stops
+  comparing because the filtered item has changed, and therefore stops due to not having anything else to compare with.
+  I don't know how much of it (the explanation) I got right, if any of it right, but that's the best I could think of.
+  Good thing, my code now works! I just wanted to leave my thoughts throughout the process, and this part right here
+  did get on my nerves a lot due to me not figuring out what was wrong. 
+  
+  "The worst error in coding isn't an error within the code, but the logic behind it." - Logan Ravanes (aka me)
+  
+  Basically, if the code's logic (with is my fault) doesn't make sense or isn't good enough, the program cannot help you and
+  you have to figure it out all by yourself. If you want to test what I mean, change the
+       if ran_enemy_item == "nothing":
+  to
+       elif ran_enemy_item == "nothing":
+  and you'll see what I mean. Sorry for the loads of text, just wanted to show case a huge issue I had with the code. Took me like a
+  hour to fix, but still the hardest part I've done.
+  
+  I talked to my friend Thomas, and he said that since my first statement was true, and others didn't work. I guess
+  it was more simple than I thought. 
+  """
+  
+  if ran_enemy_item == "nothing":
+    print("The enemy attacked you!")
+    user_hp -= enemy_atk
+    print("The enemy hit you for", enemy_atk, "atk!")
+    return ""
+  
+  elif ran_enemy_item == "healing potion":
+    print("The enemy healed!")
+    enemy_inv.remove("healing potion")
+    enemy_hp += 50
+    print("The enemy healed for 50 hp!")
+    return ""
+    
+  elif ran_enemy_item == "slingshot":
+    print("The enemy used a slingshot!")
+    enemy_inv.remove("slingshot")
+    user_hp -= 50
+    print("The enemy hit you for 50 hp!")
+    return ""
+   
+  elif ran_enemy_item == "special weapon":
+    enemy_inv.remove("special weapon")
+    print("\nOh no! The enemy is using their special weapon! You can dodge, but you must answer these 3 basic questions:")
+    question_one = input("\nWhat is 5/2? (Answer should be only 1 decimal place):")
+    if question_one == str(2.5):
+      question_two = input("\nCorrect! What is 10 * 5?:")
+      if question_two == str(50):
+        question_three = input("\nCorrect! Last question: What is 4(3 + 4)?:")
+        if question_three == str(28):
+          print("\nSuccess! You have successfully dodged the attack!")
+          return ""
+        else:
+          print("\nWrong! You have been hit! Since you got 2 right, the attack has been reduced by a lot.")
+          user_hp -= 100
+          enemy_hp += 50
+          return ""
+      else:
+        print("\nWrong! You have been hit! Since you got 1 right, the attack was slightly reduced.")
+        user_hp -= 200
+        enemy_hp += 100
+        return ""
+    else:
+      print("\nWrong! You have been hit! Since you didn't get any questions right, the special item is in full effect.")
+      user_hp -= 300
+      enemy_hp += 150
+      return ""
+   
+  else:
+    print("\nThe enemy attacked you!")
+    user_hp -= enemy_atk
+    print("The enemy hit you for", enemy_atk, "hp.")
+    return ""
+
+# This will be used for later.
+
+coins = 0
+
+# This was the new way of showing stats in battles:
+
+def double_stats():
+  
+  """
+  Summary - Used for battles to easily show both the user's and enemy's stats and inventories.
+  
+  Args - N/A
+  
+  Returns - N/A
+  """
+  
+  global enemy_hp
+  global enemy_atk
+  global enemy_inv
+  global user_hp
+  global user_atk
+  
+  # I looked up how .format() works, but did not copy any code.
+  # I wanted to make the stats as neat as possible.
+  # Print stats:
+  
+  story_input = input("MAKE AN INPUT:")
+  
+  print("---------------------------")
+  print("Current stats - ")
+  print("Health:", user_hp)
+  print("Damage:", user_atk)
+  print("Inventory:")
+  inventory.sort()
+  for i in inventory:
+    print ("-", i)
+  print("---------------------------")
+  print("Current enemy stats - ")
+  print("Health:", enemy_hp)
+  print("Damage:", enemy_atk)
+  print("Inventory:")
+  enemy_inv.sort()
+  for i in enemy_inv:
+    if i != "nothing":
+      print("-", i)
+    else:
+      pass
+  print("---------------------------")
+  return ""
+
+# [ ] Time to code the function of the battle.
+
+def battle():
+ 
+ """
+ Summary - This function controls how the battle between the user and the enemy plays out.
+ 
+ Args - N/A
+ 
+ Returns - N/A
+ """
+ 
+ global enemy_hp
+ global enemy_atk
+ global user_hp
+ global user_atk
+ global coins
+ 
+ while True:
+    
+    if enemy_hp <= 0:
+      print("\nYou slayed the enemy!")
+      coins += 5
+      return "You won!"
+    
+    elif user_hp <= 0:
+      print("You have been slayed by the enemy.")
+      print("You lost.")
+      print(stopwatch(datetime.today()))
+      return quit()
+
+    else:
+      
+      # This was taking up too much space so I made a different way to showcase stats.
+      """
+      print(user_stats(user_atk, user_hp))
+      print(enemy_stats(enemy_atk, enemy_hp))
+      """
+      print(double_stats())
+      
+      print("You can open your inventory and use it or attack.")
+      ask_user = input("What will you do? (type: inventory / attack):").lower()
+      while True:
+        if ask_user == "inventory":
+          user_inv(inventory)
+          print("\nYour turned was used.\n")
+          break
+        elif ask_user == "attack":
+          enemy_hp -= user_atk
+          print("\nYou attacked the enemy for", user_atk, "atk!")
+          break
+        else:
+          ask_user = input("\nSomething went wrong, do you want to open your inventory or attack?:\n").lower()
+      if enemy_hp <= 0:
+        pass
+      else:
+        print("\nIt is your enemy's turn.\n")
+        enemy_actions()
+
+print(battle())
+
+print("\nCongratulations! You've defeated you're first enemy!")
+print("For such a feat, you now have", coins, "coins!")
+print("You are allowed to spend them at the shop.")
+
+def shop():
+ 
+ """
+ Summary - This function is an easy way to allow the user to purchase items are buffs.
+ 
+ Args - N/A
+ 
+ Returns - N/A
+ """
+ 
+ global user_hp
+ global user_atk
+ global coins  
+ global inventory
+ 
+ shop_inv_items = ["healing potion - 1 coin", "healing potion - 1 coin", "healing potion - 1 coin", "slingshot - 1 coin", "slingshot - 1 coin", "slingshot - 1 coin", "legendary item - 10 coins"]
+ shop_inv_buffs = ["restore hp - 3 coins", "improve damage - 2 coins"]
+ 
+ # I was having issues with the code. Howeverm most of it happened in the while True statement where the function happened.
+ # I also missed many break statements. All of these accidendents made the output infinitely repeat itself.
+ 
+ while True:
+    if coins <= 0:
+      print("You have no more coins.")
+      break
+    else:
+      print("You have", coins, "coins.")
+      print("\tThese are your options:")
+      print(40 * "-")
+      print("Available items are:")
+      for i in shop_inv_items:
+        print("-", i)
+      print("Available buffs are:")
+      for i in shop_inv_buffs:
+        print("-", i)
+      print("Type \"close\" to exit the shop.")
+      print(40 * "-")
+      shop_purchases = input("What do you want from the shop? (Fully type out of item):").lower()
+
+      while True:
+      
+      # These are all the choices you can get while purchasing.
+      # NOTE: I can and might add more things to the list.
+      # If I do, I will have to add it in the
+      # user_inv(inventory) as well.
+      
+        if shop_purchases == "close":
+          print("\nClosing shop...")
+          return ""
+    
+        elif shop_purchases == "healing potion":
+          if "healing potion - 1 coin" in shop_inv_items:
+            if coins >= 1:
+              shop_inv_items.remove("healing potion - 1 coin")
+              coins -= 1
+              inventory.append("healing potion")
+              print("NEW ITEM: healing potion - heals 100 hp\n")
+              break
+            else:
+              print("\nYou do not have enough coins to buy this product.\n")
+              break
+          else:
+            print("There are no more items in the shop's inventory.")
+            break
+     
+        elif shop_purchases == "slingshot":
+          if "slingshot - 1 coin" in shop_inv_items:
+            if coins >= 1:
+              shop_inv_items.remove("slingshot - 1 coin")
+              coins -= 1
+              inventory.append("slingshot")
+              print("NEW ITEM: slingshot - deals 150 hp\n")
+              break
+            else:
+              print("\nYou do not have enough coins to buy this product.\n")
+              break
+          else:
+            print("There are no more items in the shop's inventory.")
+            break
+        
+        elif shop_purchases == "restore hp":
+          if "restore hp - 3 coins" in shop_inv_buffs:
+            if coins >= 3:
+              shop_inv_buffs.remove("restore hp - 3 coins")
+              coins -= 3
+              """
+              The code below me made me realize that a health cap is annoying to deal with, so I decided to allow hp to stack.
+              
+              if new_item == "B":
+                user_hp = 300
+                print("Your health has been restored to 300 hp!")
+                break
+              else:
+                user_hp = 200
+                print("Your health has been restored to 200 hp!")
+                break
+              """
+              print("You restore 200 hp!")
+              user_hp += 200
+              break
+            else:
+              print("\nYou do not have enough coins to buy this product.\n")
+              break
+          else:
+            print("There are no more items in the shop's inventory.")
+            break
+       
+        elif shop_purchases == "improve damage":
+          if "improve damage - 2 coins" in shop_inv_buffs:
+            if coins >= 2:
+              shop_inv_buffs.remove("improve damage - 2 coins")
+              coins -= 2
+              user_atk += 25
+              print("Your damage improved! You know attack for", user_atk, "atk!")
+              break
+            else:
+              print("\nYou do not have enough coins to buy this product.\n")
+              break
+          else:
+            print("There are no more items in the shop's inventory.")
+            break
+        
+        # New items
+        
+        elif shop_purchases == "legendary item":
+          if "legendary item - 10 coins" in shop_inv_items:
+            if coins >= 10:
+              shop_inv_items.remove("legendary item - 10 coins")
+              coins -= 10
+              inventory.insert(0, "legendary item")
+              print("\nNEW ITEM: legendary item - deals 500 damage")
+              break
+            else:
+              print("You do not have enough coins to buy this profuct.")
+              break
+          else:
+            print("There are no more items in the shop's inventory.")
+            break
+     
+        else:
+          print("Something went wrong.")
+          break  
+ print("\nThank you for shopping!")
+ return "Closing shop...\n"
+
+journey = input("Do you want to \"continue\" journey or go to \"shop\"?:").lower()
+while True:
+  if journey == "continue":
+    break
+  elif journey == "shop":
+    print(shop())
+    print("You have", coins, "coins left.")
+    
+    # The break statement below this comment is the reason why nothing repeats itself infinitely.
+    
+    break
+  else:
+    print("I couldn't understand you.")
+    journey = input("What do you want to do? Please type \"continue\" or \"shop\".")
+
+print(user_stats(user_atk, user_hp))
+
+# Before I continue, after checking on a blank trinket, I have 400 lines of raw code. No spaces, no comments, no doc strings, all code.
+# The only thing that takes space that couldn't would be multi-lined lists or strings, but it helps organize. I just want to leave this 
+# comment here to show how happy I am so far with everything going with this code. The code portion of the PBM is practically almost
+# over because I am going to reuse some of the functions. I will add a way to show how much time the game will take, a treassure chest that
+# your password will be reused, and a credit for all of those who tested my game and gave me feedback or advice. Thank you for letting this
+# be my final exam, because this was the most fun I've ever had!
+
+# [ ] It is time to continue the journey and give the user a few more items.
+
+print("As you leave the shop, you follow a road further down your journey.")
+
+import time
+time.sleep(1)
+"""
+story_input = input("\nMAKE AN INPUT:")
+"""
+
+print("\nSoon, you see a tree with an item on it.")
+
+pick_up = input("Do you pick up the item? (YES/NO):").lower()
+
+if pick_up == "yes":
+  print("You see that the item is armor!")
+  print("\nNEW ITEM: better armor (auto-equipped) - adds 100 hp\n")
+  user_hp += 100
+elif pick_up == "no":
+  print("You decided to play safe and walk past the tree.")
+else:
+  print("You couldn't decide properly, and you see the item blow away in the wind.")
+
+import time
+time.sleep(2)
+
+print("You keep walking past the tree. Up ahead, you see that same guy who gave you goodies before.\n")
+
+print("\"Oh hey there Captain", user_name_age.split()[2] + ", I found a treasure chest but it has a lock, and I can't figure out what the correct combination is.\"")
+
+def treasure(answer_code):
+ 
+ """
+ Summary - Allows the user to have a chance of getting a free item! Only if they remember their password.
+ 
+ Args - answer_code: This variable allows a single output from the user, granting them only 
+ one chance to succeed.
+ 
+ Returns - answer_code: Based on the user's memory and response, they either get a free item or
+ nothing.
+ """
+ 
+ global password
+  
+ if answer_code == str(password):
+    inventory.insert(0,"special item")
+    print("\"You got that correct! Here, since you got opened it, you should take the item!\"")
+    print("\nNEW ITEM: special item - does 200 damage and heals for 50 hp\n")
+    return "\"Good luck on your journey!\""
+ else:
+    return "\"Oh, that's not the right combination. No worries, I'll go to town to break it open.\""
+
+import time
+time.sleep(1)
+
+print(treasure(input("\n\"Maybe you know the combination, do you know what it could be?\":")))
+
+print(user_stats(user_atk, user_hp))
+
+# [ ] Now the user will go into their second battle, after they will revisit the shop
+# one last time, get a chance to gain another item one more time and go into their last battle.
+
+print("As you continue your journey, you see an enemy in the distance.")
+print("\nYou decide to go fight the enemy to chase your objective, which is defeating the final boss.")
+
+enemy_hp = 300
+enemy_atk = 45
+enemy_inv = ["slingshot", "slingshot", "nothing", "nothing", "healing potion", "nothing"]
+
+print(battle())
+
+print("Wow! You won your second main battle! Only the main boss left!")
+
+# [ ] I thought of a cool idea to farm items for the final boss. I am going to make a single enemy
+# and allow the user to farm them, however they will have a random drop, and sometimes won't even
+# drop anything.
+
+print("\nBefore continuing, you should know what you're going against.")
+
+# I will switch these off with the grinder-enemy stats, I just have these to showcase what the user will go against.
+
+
+enemy_hp = 2000
+enemy_atk = 75
+"""
+And I don't want to show their inventory yet.
+enemy_inv = ["special weapon", "slingshot", "slingshot", "healing potion", "healing potion", "healing potion",
+             "super healing potion", "nothing", "nothing", "nothing", "nothing"]
+"""
+enemy_inv = ["unknown", "unknown", "unknown", "unknown", "unknown", "unknown", "unknown"]
+print(enemy_stats(enemy_atk, enemy_hp))
+
+print("Yeah, he is a beefy guy. You might want to do some grinding in order to stand a chance against him.")
+print("However, it is your choice.")
+
+print("\nHere comes a shop, understand that before you fight the main guy, you will see the shop for the last time.")
+
+print(shop())
+
+"""
+On Visual Studio, I used this code to test the final boss (and gave my self items to help me win.)
+At this point, I've been working on this code during classes, at home and at lunch.
+I just hope this all turns out well.
+
+inventory.append("slingshot")
+inventory.append("slingshot")
+
+print("BOSS FIGHT")
+
+print(battle())
+"""
+
+print(user_stats(user_atk, user_hp))
+
+# [ ] Now I am going to make a grinding like game for 1 coin + a chance of an item every kill.
+# This is before the final boss.
+# NOTE: I plan on making "classes", but really it just asks you what stats you want to start with.
+
+"""
+This is me testing a function my friend Xander had shown me
+after I told him I was trying to slow down certain inputs.
+He taked about a .sleep() and showed me code of his own that
+used it. Once i get the code down, I'll give his name.
+He and Thomas is in my Python Class. The code below was me
+experimenting with the function on a blank trinket.
+(That is all original code or code I typed up) I plan on
+using a similar setup for my credits.
+
+import time
+time.sleep(1)
+
+listo = []
+listo_2 = "abcdefghijklmnopqrstuvwxyz"
+for i in listo_2:
+  listo.append(i)
+
+print(listo)
+for i in listo:
+  import time
+  time.sleep(1)
+  print(i)
+"""
+
+print("Your stats are a bit underwhelming.")
+
+import time
+time.sleep(.5)
+
+print("\nYou can farm weaker enemies for items.")
+
+# I had to do make enemy_inv = [] because of past lines of code.
+enemy_inv = ["nothing"]
+while True:
+  
+  print(user_stats(user_atk, user_hp))
+  
+  # I could've made this into a function, but I decided not to because it wasn't needed.
+    
+  farm_enemies = input("\nDo you want to farm enemies? (YES/NO):").lower()
+    
+  if farm_enemies == "yes":
+    
+    random_enemy_hp = [50, 70, 100, 125, 130, 145, 150, 160, 200, 230, 250]
+    random_enemy_atk = [10, 15, 20, 25]
+    from random import shuffle
+    shuffle(random_enemy_hp)
+    shuffle(random_enemy_atk)
+    enemy_hp = random_enemy_hp[0]
+    enemy_atk = random_enemy_atk[0]
+      
+    print("\nThese are your enemy's stats:")
+    print(enemy_stats(enemy_atk, enemy_hp))
+    print("Prepare to fight...")
+    import time
+    time.sleep(1)
+    print(battle())
+      
+    # The coins thing is so the user cannot buy everything outright.
+    coins -= 5
+    coins += 1
+    
+    # This is to give the user a random item as drop loot.
+    from random import shuffle, randint
+    farming_item = ["healing potion", "slingshot", "improve damage"]
+    shuffle(farming_item)
+    ran_item = farming_item[randint(0,2)]
+    if ran_item == "improve damage":
+      print("\nYour damaged improved!")
+      user_atk += 20
+    else:
+      print("NEW ITEM:", ran_item)
+      inventory.append(ran_item)
+    print("Good job adventurer! You now have", coins, "coins that you can use for the shop after your farming session.")
+  elif farm_enemies == "no":
+    print("Alright! On to the final boss!")
+    break
+  else:
+    print("There seems to be an error, please retype your input.")
+
+print("You have gained a lot of expierence and power from these last few battles, but it is time to put it all to a test.")
+
+print("But first, lets visit the shop one last time.")
+print(shop())
+
+enemy_atk = 75
+enemy_hp = 2000
+enemy_inv = enemy_inv = ["special weapon", "slingshot", "slingshot", "healing potion", "healing potion", "healing potion",
+                         "super healing potion", "nothing", "nothing", "nothing", "nothing"]
+
+ask_if_ready = input("Are you ready?:").lower()
+if ask_if_ready == "yes":
+  print("You got this!")
+else:
+  print("You thought you shouldn't fight the boss yet, but you accidently angered the boss and now have to fight the boss. Good luck!")
+
+print(battle())
+
+import time
+time.sleep(2)
+
+print("Congratulations", user_name_age.split()[1], user_name_age.split()[2] + "! You've have beaten my game! I hoped you enjoyed, and I hope you're happy with your")
+print("\t\t\\CHOICES/")
+
+import time
+time.sleep(2)
+print("\n\t\tYour Stats:")
+time.sleep(1)
+print(user_stats(user_atk, user_hp))
+time.sleep(1)
+
+print("\n\t\tCredits:")
+print(45 * "-")
+import time
+time.sleep(1)
+print("\nLogan Ravanes - Coder")
+time.sleep(1)
+print("\nThomas Kivelen - Advice Giver and Code Breaker/Tester")
+time.sleep(1)
+print("\nXander Benchley - Advice Giver and Code Tester")
+time.sleep(1)
+print("\nMrs. Lynch - Python Teacher")
+time.sleep(1)
+print("\n\t\tCode Testers:")
+time.sleep(1)
+print("\nMaryAnn")
+time.sleep(1)
+print("\nVictor")
+time.sleep(1)
+print("\nRaven")
+time.sleep(1)
+print("\n\t\tThank You for the Fun!")
+print("*The link below downloads a PDF of the flow chart I did for the PBM*")
+print("https://lucid.app/publicSegments/view/02afecb0-cfb3-486e-a12e-fe96a6b95db0")
+
+
+
+
+
+
+
+
+
+
